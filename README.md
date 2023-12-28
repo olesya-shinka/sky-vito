@@ -12,7 +12,7 @@
 1. Склонируйте репозиторий:
 
 ```
-$ git clone 
+$ git clone https://github.com/olesya-shinka/sky-vito.git
 ```
 
 2. Установите зависимости:

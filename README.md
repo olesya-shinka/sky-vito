@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# **_Skyvito_**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Дипломный проект SkyVito
 
-## Available Scripts
+## Описание проекта:
 
-In the project directory, you can run:
+Аналог сайта авито.
+Приложение реализовано как SPA.
 
-### `npm start`
+# Запуск
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Склонируйте репозиторий:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+$ git clone 
+```
 
-### `npm test`
+2. Установите зависимости:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+$ npm i
+```
 
-### `npm run build`
+3. Запустите проект:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+$ npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Технический стек
+-
 
-### `npm run eject`
+# Структура приложения и функционал
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. Главная страница:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- логотип приложения, кнопки авторизации/регистрации/личный кабинет/выйти
+- поиск товаров по ключевым словам
+- список всех объявлений
+- просмотр объявления с переходом на страницу объявления
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Страница объявления:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- логотип приложения, кнопки авторизации, создания объявления
+- блок с описанием объявления
+- возможность оставлять комментарии
 
-## Learn More
+### 3. Профиль продавца:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- просмотр профиля продавца
+- список всех товаров продавца
+- возможность получать номер телефона продавца
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 4. Профиль пользователя:
 
-### Code Splitting
+- смена имени, фамилии, города, телефона, аватара
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Аутентификация:
 
-### Analyzing the Bundle Size
+- токены доступа
+- при клике на кнопку "Вход в личный кабинет", открывается модальное окно с возможностью войти или зарегистрироваться. В случае регистарции после успешного ввода данных пользователь переходит в окно для входа
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Зарегистрированный пользователь может:
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- добавить объявление
+- снять объявление с публикации
+- редактирование объявления
+- добавить отзыв о товаре

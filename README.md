@@ -11,26 +11,22 @@
 
 1. Склонируйте репозиторий:
 
-```
-$ git clone https://github.com/olesya-shinka/sky-vito.git
-```
+git clone https://github.com/olesya-shinka/sky-vito.git
 
 2. Установите зависимости:
 
-```
-$ npm i
-```
+npm i
 
 3. Запустите проект:
 
-```
-$ npm start
-```
-
----
+npm start
 
 ### Технический стек
--
+
+- React
+- Redux + Redux Toolkit + RTK Query
+- Router DOM, реализация routing
+- react-hook-form
 
 # Структура приложения и функционал
 

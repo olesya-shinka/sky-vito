@@ -39,7 +39,6 @@ function Main() {
     });
     setAdsFiltered(tmp);
   };
-  // ///////
 
   const ref = useRef(null);
 
@@ -65,7 +64,7 @@ function Main() {
               placeholder="Поиск по объявлениям"
               onInput={handleSearchData}
               value={searchData}
-              onClick={(event) => {
+              onClick={() => {
                 const element = ref.current;
                 element.addEventListener("search", onClear);
                 setTimeout(() =>
@@ -73,7 +72,7 @@ function Main() {
                 );
               }}
             ></S.Search__text>
-            <S.Search__text_mob />
+            <S.Search__text_mob placeholder="Поиск" />
             <S.Search__btn onClick={searchAds}>Найти</S.Search__btn>
           </S.Search__form>
         </S.Main__search>

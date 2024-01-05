@@ -35,7 +35,6 @@ export const Main__search = styled.div`
 
 export const Search__logo_link = styled.a`
   @media screen and (max-width: 590px) {
-    display: none;
   }
 `;
 
@@ -47,7 +46,6 @@ export const Search__logo_img = styled.img`
 export const Search__logo_mob_link = styled.a`
   display: none;
   @media screen and (max-width: 590px) {
-    display: block;
     width: 32px;
     height: 32px;
     background-color: white;

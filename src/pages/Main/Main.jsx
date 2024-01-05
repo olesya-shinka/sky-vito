@@ -80,8 +80,8 @@ function Main() {
           <S.Main__header>Объявления</S.Main__header>
           <S.Main__content>
             <S.Content__cards>
-              {adsFiltered?.map((el) => (
-                <CardsItem element={el} />
+              {adsFiltered?.map((el, i) => (
+                <CardsItem key={i} element={el} />
               ))}
             </S.Content__cards>
           </S.Main__content>

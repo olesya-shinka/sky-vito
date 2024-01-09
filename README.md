@@ -24,7 +24,7 @@ npm start
 ### Технический стек
 
 - React
-- Redux + Redux Toolkit + RTK Query
+- Redux + Redux Toolkit
 - Router DOM, реализация routing
 - react-hook-form
 

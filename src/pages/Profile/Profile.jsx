@@ -129,7 +129,7 @@ function Profile() {
       <S.Main__container>
         <S.Main__center_block>
           <S.Main__menu>
-            <S.Menu__logo_link href="" target="_blank">
+            <S.Menu__logo_link target="_blank">
               <S.Menu__logo_img src={logo} alt="logo" />
             </S.Menu__logo_link>
             <S.Menu__form>
@@ -220,7 +220,7 @@ function Profile() {
           <S.Content__cards>
             {!userAds
               ? "Загрузка..."
-              : userAds?.map((el) => <CardsItem element={el} />)}
+              : userAds?.map((el, i) => <CardsItem element={el} key={i + 1} />)}
           </S.Content__cards>
         </S.Main__content>
       </S.Main__container>

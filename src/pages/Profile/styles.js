@@ -146,6 +146,7 @@ export const Menu__btn = styled.button`
   font-size: 16px;
   line-height: 1;
   color: #ffffff;
+  cursor: pointer;
 `;
 export const Main__header = styled.h2`
   font-style: normal;

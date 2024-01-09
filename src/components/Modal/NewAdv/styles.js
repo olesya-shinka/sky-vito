@@ -341,7 +341,6 @@ export const Form__newArt_bar_img = styled.div`
   flex-direction: row;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -367,6 +366,26 @@ export const Form__newArt_bar_img = styled.div`
     overflow: hidden;
   }
 `;
+
+export const DeleteButton = styled.button`
+  border-radius: 7px;
+  border: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+  width: 150px;
+  line-height: 25px;
+  margin-left: 170px;
+  position: relative;
+  background-color: #FF0000;
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+`;
+
 export const Form__newArt_img = styled.label`
   width: 90px;
   height: 90px;

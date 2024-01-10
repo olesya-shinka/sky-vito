@@ -210,8 +210,8 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
-  const handleDeletePhoto = () => {
-    alert("Delete Photo");
+  const handleDeletePhoto = async () => {
+    setImages(currentAd.images);
   };
 
   return (

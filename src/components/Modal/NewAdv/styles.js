@@ -69,7 +69,7 @@ export const Modal__content = styled.div`
   -webkit-box-align: start;
   -ms-flex-align: start;
   align-items: flex-start;
-  width: 600px;
+  width: 700px;
   height: auto;
   padding: 32px 50px 42px;
   background-color: #ffffff;
@@ -331,7 +331,7 @@ export const Form__newArt_p = styled.p`
   }
 `;
 export const Form__newArt_bar_img = styled.div`
-  width: 500px;
+  width: 600px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

@@ -171,6 +171,7 @@ export const Btn__enter = styled.button`
   margin-top: 38px;
   margin-bottom: 20px;
   border: none;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -219,6 +220,7 @@ export const Btn__signup = styled.button`
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
+  cursor: pointer;
   letter-spacing: -0.05px;
   color: #000000;
   display: -webkit-box;

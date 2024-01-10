@@ -210,12 +210,8 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
-  const handleDeletePhoto = (index) => {
-    setImages((prev) => [
-      ...prev.slice(0, index),
-      undefined,
-      ...prev.slice(index + 1),
-    ])
+  const handleDeletePhoto = () => {
+    alert("Delete Photo");
   };
 
   return (
@@ -263,7 +259,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
-              
+                <RiDeleteBin7Line
+                  onClick={handleDeletePhoto}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img for="fileupload2">
                   <S.Form__newArt_img_cover>
@@ -277,6 +276,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={handleDeletePhoto}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img for="fileupload3">
                   <S.Form__newArt_img_cover>
@@ -290,6 +293,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={handleDeletePhoto}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img for="fileupload4">
                   <S.Form__newArt_img_cover>
@@ -303,6 +310,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={handleDeletePhoto}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img for="fileupload5">
                   <S.Form__newArt_img_cover>
@@ -316,6 +327,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={handleDeletePhoto}
+                  style={{ cursor: "pointer" }}
+                />
               </S.Form__newArt_bar_img>
             </S.Form__newArt_block>
             <S.Form__newArt_block>

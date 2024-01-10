@@ -372,10 +372,11 @@ export const DeleteButton = styled.button`
   border: transparent;
   cursor: pointer;
   transition: 0.2s;
-  width: 150px;
-  line-height: 25px;
+  width: 25px;
+  line-height: 20px;
   margin-left: 170px;
   position: relative;
+  align-items: center;
   background-color: #FF0000;
   &:hover {
     transform: scale(1.05);

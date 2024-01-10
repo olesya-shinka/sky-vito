@@ -22,10 +22,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
     price: currentAd ? currentAd.price : "",
     error: false,
   });
-  const NUMBER_OF_IMAGES = 5;
-  let updatedImagesArray = [...new Array(NUMBER_OF_IMAGES)];
-  let formData = [...new Array(NUMBER_OF_IMAGES)];
-  const [updateImages, setUpdateImages] = useState(updatedImagesArray);
 
   //State at the time of request when creating an ad
   const [requestProcess, setRequestProcess] = useState({
@@ -95,17 +91,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
       setImages((prev) => ({ ...prev, [event.target.id]: selectedFile }));
     }
   };
-
-  const handleDeletePhoto = (index) => {
-    setUpdateImages((prev) => [
-      ...prev.slice(0, index),
-      undefined,
-      ...prev.slice(index + 1),
-    ]);
-    formData[index] = index;
-    
-  };
-  console.log(formData);
 
   const getImgSrc = (key) => {
     if (images[key]) {
@@ -188,14 +173,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
         currentAd.id
       );
 
-      // const ids = Object.keys(images);
-      // if (ids.length > 0) {
-      //   for (const id in images)
-      //   {
-      //   const formData = new FormData();
-      //   formData.delete('file', images[key]);
-      //   await deleteAddPhoto(formData, adv.id);
-      //   }
       const addArray = [];
       const delArray = [];
 
@@ -231,6 +208,14 @@ function NewAdv({ modal, handleModal, currentAd }) {
     } catch (error) {
       setRequestProcess({ loading: false, error: error.message });
     }
+  };
+
+  const handleDeletePhoto = (index) => {
+    setImages((prev) => [
+      ...prev.slice(0, index),
+      undefined,
+      ...prev.slice(index + 1),
+    ])
   };
 
   return (
@@ -278,6 +263,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+              
 
                 <S.Form__newArt_img for="fileupload2">
                   <S.Form__newArt_img_cover>
@@ -331,9 +317,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
               </S.Form__newArt_bar_img>
-              <S.DeleteButton onClick={() => handleDeletePhoto()}>
-                <RiDeleteBin7Line />
-              </S.DeleteButton>
             </S.Form__newArt_block>
             <S.Form__newArt_block>
               <label for="price">Цена</label>

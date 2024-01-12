@@ -14,7 +14,7 @@ import { setAdsList, setShouldUpdate } from "../../../store/slices/adsSlice";
 import { validatePrice } from "../../../utils/validate";
 
 function NewAdv({ modal, handleModal, currentAd }) {
-  const [images, setImages] = useState({});
+  const [images, setImages] = useState([]);
   //Ad details
   const [newAdData, setNewAdData] = useState({
     title: currentAd ? currentAd.title : "",
@@ -22,6 +22,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
     price: currentAd ? currentAd.price : "",
     error: false,
   });
+  //const [updateImages, setUpdateImages] = useState([]);
 
   //State at the time of request when creating an ad
   const [requestProcess, setRequestProcess] = useState({
@@ -191,11 +192,19 @@ function NewAdv({ modal, handleModal, currentAd }) {
         formData.append("file", el);
         requests.push(() => postNewAdPhoto(formData, currentAd.id));
       });
-      delArray.forEach((el) => {
-        const formData = new FormData();
-        formData.delete("file", el);
-        requests.push(() => delPhoto(currentAd.id, { file_url: el }));
-      });
+      if (images.length > 0) {
+        images.map(async (image) => {
+          try {
+            const imageResponse = await delPhoto({
+              ad_id: currentAd.id,
+              file_url: image,
+            });
+            console.log(imageResponse);
+          } catch (error) {
+            console.log(error);
+          }
+        });
+      }
 
       await Promise.all(requests.map((request) => request()));
 
@@ -210,8 +219,28 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
-  const handleDeletePhoto = async () => {
-    setImages(currentAd.images);
+  // const handleDeletePhoto = async () => {
+  //   setImages(currentAd.images);
+  // };
+
+  // if (images.length > 0) {
+  //   images.map(async (image) => {
+  //     try {
+  //       const imageResponse = await delPhoto({
+  //         ad_id: currentAd.id,
+  //         file_url: image,
+  //       });
+  //       console.log(imageResponse);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   });
+  // }
+
+  const handleDeletePhoto = (index) => {
+    const updatedImages = [...images];
+    updatedImages.splice(index, 1);
+    setImages(updatedImages);
   };
 
   return (

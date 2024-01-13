@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useMemo, useState, React } from "react";
 import * as S from "./styles";
 import {
@@ -112,7 +111,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
 
       setImages(imgObject);
     } else setImages({});
-  }, [currentAd?.id, currentAd.images]);
+  }, [currentAd?.id]);
 
   const makeNewAd = async () => {
     if (!validatePrice(newAdData.price)) {
@@ -211,9 +210,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
-  const handleDeletePhoto = () => {
-    setImages(currentAd.images);
-  };
+  const handleDeletePhoto = () => {};
 
   // if (images.length > 0) {
   //   images.map(async (image) => {

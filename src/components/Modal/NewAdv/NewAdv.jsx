@@ -192,19 +192,11 @@ function NewAdv({ modal, handleModal, currentAd }) {
         formData.append("file", el);
         requests.push(() => postNewAdPhoto(formData, currentAd.id));
       });
-      if (images.length > 0) {
-        images.map(async (image) => {
-          try {
-            const imageResponse = await delPhoto({
-              ad_id: currentAd.id,
-              file_url: image,
-            });
-            console.log(imageResponse);
-          } catch (error) {
-            console.log(error);
-          }
-        });
-      }
+      delArray.forEach((el, [i]) => {
+        const formData = new FormData();
+        formData.delete("file", el[i]);
+        requests.push(() => delPhoto(currentAd.id, { file_url: el[i] }));
+      });
 
       await Promise.all(requests.map((request) => request()));
 
@@ -219,9 +211,9 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
-  // const handleDeletePhoto = async () => {
-  //   setImages(currentAd.images);
-  // };
+  const handleDeletePhoto = () => {
+    setImages(currentAd.images);
+  };
 
   // if (images.length > 0) {
   //   images.map(async (image) => {
@@ -237,11 +229,11 @@ function NewAdv({ modal, handleModal, currentAd }) {
   //   });
   // }
 
-  const handleDeletePhoto = (index) => {
-    const updatedImages = [...images];
-    updatedImages.splice(index, 1);
-    setImages(updatedImages);
-  };
+  // const handleDeletePhoto = (index) => {
+  //   const updatedImages = [...images];
+  //   updatedImages.splice(index, 1);
+  //   setImages(updatedImages);
+  // };
 
   return (
     <S.Wrapper style={{ visibility: modal ? "visible" : "hidden" }}>
@@ -280,6 +272,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   <S.Form__newArt_img_cover>
                     <img src={getImgSrc("fileupload1")} alt="" />
                   </S.Form__newArt_img_cover>
+
                   <S.inputChange
                     id="fileupload1"
                     name="photo"

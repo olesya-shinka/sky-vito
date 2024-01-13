@@ -73,6 +73,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
     currentAd,
     images,
   ]);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const handleTitle = (e) =>
     setNewAdData((prev) => ({ ...prev, title: e.target.value }));
@@ -191,10 +192,16 @@ function NewAdv({ modal, handleModal, currentAd }) {
         formData.append("file", el);
         requests.push(() => postNewAdPhoto(formData, currentAd.id));
       });
-      delArray.forEach((el, [i]) => {
-        const formData = new FormData();
-        formData.delete("file", el[i]);
-        requests.push(() => delPhoto(currentAd.id, { file_url: el[i] }));
+      delArray.forEach(async (image, index) => {
+        try {
+          const imageResponse = await delPhoto({
+            ad_id: currentAd,
+            file_url: image[index],
+          });
+          console.log(imageResponse);
+        } catch (error) {
+          console.log(error);
+        }
       });
 
       await Promise.all(requests.map((request) => request()));
@@ -210,27 +217,25 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
-  const handleDeletePhoto = () => {};
+  if (images.length > 0) {
+    images.map(async (image, index) => {
+      try {
+        const imageResponse = await delPhoto({
+          ad_id: currentAd.id,
+          file_url: image,
+        });
+        console.log(imageResponse, index);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }
 
-  // if (images.length > 0) {
-  //   images.map(async (image) => {
-  //     try {
-  //       const imageResponse = await delPhoto({
-  //         ad_id: currentAd.id,
-  //         file_url: image,
-  //       });
-  //       console.log(imageResponse);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   });
-  // }
-
-  // const handleDeletePhoto = (index) => {
-  //   const updatedImages = [...images];
-  //   updatedImages.splice(index, 1);
-  //   setImages(updatedImages);
-  // };
+  const handleDeletePhoto = (imageResponse) => {
+    // const updatedImages = [...selectedImages];
+    // updatedImages.splice(index, 1);
+    setSelectedImages(imageResponse.file_url);
+  };
 
   return (
     <S.Wrapper style={{ visibility: modal ? "visible" : "hidden" }}>
@@ -279,7 +284,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                  onClick={handleDeletePhoto}
+                  onClick={() => handleDeletePhoto}
                   style={{ cursor: "pointer" }}
                 />
 

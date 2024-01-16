@@ -155,7 +155,7 @@ function Profile() {
                       />
                     </Link>
                   </S.Settings__img>
-                  <S.Settings__change_photo for="file-upload">
+                  <S.Settings__change_photo htmlFor="file-upload">
                     Заменить
                   </S.Settings__change_photo>
                   <S.inputChange

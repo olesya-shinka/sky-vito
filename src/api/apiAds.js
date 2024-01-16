@@ -291,10 +291,15 @@ export async function patchAd(params, ad_id) {
   return data;
 }
 
-export async function delPhoto(ad_id, params) {
+export async function delPhoto(ad_id, file_url) {
   let accessToken = localStorage.getItem("access_token");
-  let url = new URL(`/ads/${ad_id}/image`, process.env.REACT_APP_API_URL);
-  if (params?.file_url) url.searchParams.delete("file_url", params.file_url);
+  console.log(accessToken);
+  // if (params?.file_url) url.searchParams.delete("file_url", params.file_url);
+  const searchParams = new URLSearchParams({ file_url });
+  let url = new URL(
+    `/ads/${ad_id}/image/?${searchParams}`,
+    process.env.REACT_APP_API_URL
+  );
   if (isExpired(accessToken)) {
     await newToken();
     accessToken = localStorage.getItem("access_token");
@@ -308,4 +313,5 @@ export async function delPhoto(ad_id, params) {
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
+  return response.json();
 }

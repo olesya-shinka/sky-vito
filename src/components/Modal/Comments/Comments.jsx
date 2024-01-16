@@ -65,7 +65,7 @@ function Comments({ modal, handleModal, currentAd, updateComments }) {
               <>
                 <S.Modal__form_newArt onSubmit={(e) => e.preventDefault()}>
                   <S.Form__newArt_block>
-                    <label for="text">Добавить отзыв</label>
+                    <label htmlFor="text">Добавить отзыв</label>
                     <S.Form__newArt_area
                       placeholder="Введите описание"
                       value={commentData.text}

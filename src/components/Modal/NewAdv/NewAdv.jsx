@@ -223,9 +223,9 @@ function NewAdv({ modal, handleModal, currentAd }) {
   };
 
   const handleDeletePhoto = async (index) => {
-    if (!images[index]) {
-      return;
-    }
+    // if (!images[index]) {
+    //   return;
+    // }
     try {
       const result = await delPhoto(currentAd.id, currentAd.images[index].url);
       console.log(result);
@@ -292,7 +292,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                  onClick={() => handleDeletePhoto[0]}
+                  onClick={() => handleDeletePhoto(0)}
                   style={{ cursor: "pointer" }}
                 />
 
@@ -309,7 +309,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                  onClick={handleDeletePhoto}
+                  onClick={() => handleDeletePhoto(1)}
                   style={{ cursor: "pointer" }}
                 />
 
@@ -326,7 +326,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                  onClick={handleDeletePhoto}
+                 onClick={() => handleDeletePhoto(2)}
                   style={{ cursor: "pointer" }}
                 />
 
@@ -343,7 +343,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                  onClick={handleDeletePhoto}
+                  onClick={() => handleDeletePhoto(3)}
                   style={{ cursor: "pointer" }}
                 />
 
@@ -360,7 +360,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                  onClick={handleDeletePhoto}
+                 onClick={() => handleDeletePhoto(4)}
                   style={{ cursor: "pointer" }}
                 />
               </S.Form__newArt_bar_img>

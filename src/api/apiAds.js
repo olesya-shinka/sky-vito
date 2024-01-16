@@ -224,29 +224,6 @@ export async function postNewAdPhoto(formData, ad_id) {
   return userPhoto;
 }
 
-// export async function deleteAddPhoto(formData, ad_id) {
-//   let accessToken = localStorage.getItem("access_token");
-//   if (isExpired(accessToken)) {
-//     await newToken();
-//     accessToken = localStorage.getItem("access_token");
-//   }
-//   const response = await fetch(
-//     `${process.env.REACT_APP_API_URL}/ads/${ad_id}/image`,
-//     {
-//       method: "DELETE",
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//       body: formData,
-//     }
-//   );
-//   if (!response.ok) {
-//     throw new Error("Ошибка сервера");
-//   }
-//   const userPhoto = await response.json();
-//   return userPhoto;
-// }
-
 export async function getUserById(id) {
   let url = new URL(`/user/all`, process.env.REACT_APP_API_URL);
 
@@ -314,10 +291,15 @@ export async function patchAd(params, ad_id) {
   return data;
 }
 
-export async function delPhoto(ad_id, params) {
+export async function delPhoto(ad_id, file_url) {
   let accessToken = localStorage.getItem("access_token");
-  let url = new URL(`/ads/${ad_id}/image`, process.env.REACT_APP_API_URL);
-  if (params?.file_url) url.searchParams.delete("file_url", params.file_url);
+  console.log(accessToken);
+  // if (params?.file_url) url.searchParams.delete("file_url", params.file_url);
+  const searchParams = new URLSearchParams({ file_url });
+  let url = new URL(
+    `/ads/${ad_id}/image/?${searchParams}`,
+    process.env.REACT_APP_API_URL
+  );
   if (isExpired(accessToken)) {
     await newToken();
     accessToken = localStorage.getItem("access_token");
@@ -331,4 +313,5 @@ export async function delPhoto(ad_id, params) {
   if (!response.ok) {
     throw new Error("Ошибка сервера");
   }
+  return response.json();
 }

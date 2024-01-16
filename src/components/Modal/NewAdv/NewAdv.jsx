@@ -1,5 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useMemo, useState, React } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import cloneDeep from "lodash.clonedeep";
 import * as S from "./styles";
 import {
   delPhoto,
@@ -9,12 +11,13 @@ import {
   postNewAdPhoto,
 } from "../../../api/apiAds";
 import { RiDeleteBin7Line } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+
 import { setAdsList, setShouldUpdate } from "../../../store/slices/adsSlice";
 import { validatePrice } from "../../../utils/validate";
+import { AdsSelector } from "../../../store/selectors/adsSelector";
 
 function NewAdv({ modal, handleModal, currentAd }) {
-  const [images, setImages] = useState({});
+  const [images, setImages] = useState([]);
   //Ad details
   const [newAdData, setNewAdData] = useState({
     title: currentAd ? currentAd.title : "",
@@ -22,6 +25,8 @@ function NewAdv({ modal, handleModal, currentAd }) {
     price: currentAd ? currentAd.price : "",
     error: false,
   });
+  const ads = useSelector(AdsSelector);
+  //const [updateImages, setUpdateImages] = useState([]);
 
   //State at the time of request when creating an ad
   const [requestProcess, setRequestProcess] = useState({
@@ -73,6 +78,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
     currentAd,
     images,
   ]);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const handleTitle = (e) =>
     setNewAdData((prev) => ({ ...prev, title: e.target.value }));
@@ -111,7 +117,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
 
       setImages(imgObject);
     } else setImages({});
-  }, [currentAd?.id, currentAd.images]);
+  }, [currentAd?.id]);
 
   const makeNewAd = async () => {
     if (!validatePrice(newAdData.price)) {
@@ -191,11 +197,17 @@ function NewAdv({ modal, handleModal, currentAd }) {
         formData.append("file", el);
         requests.push(() => postNewAdPhoto(formData, currentAd.id));
       });
-      delArray.forEach((el) => {
-        const formData = new FormData();
-        formData.delete("file", el);
-        requests.push(() => delPhoto(currentAd.id, { file_url: el }));
-      });
+      // delArray.forEach(async (image, index) => {
+      //   try {
+      //     const imageResponse = await delPhoto({
+      //       ad_id: currentAd,
+      //       file_url: image[index],
+      //     });
+      //     console.log(imageResponse);
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // });
 
       await Promise.all(requests.map((request) => request()));
 
@@ -210,12 +222,27 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
-  const handleDeletePhoto = (index) => {
-    setImages((prev) => [
-      ...prev.slice(0, index),
-      undefined,
-      ...prev.slice(index + 1),
-    ])
+  const handleDeletePhoto = async (index) => {
+    // if (!images[index]) {
+    //   return;
+    // }
+    try {
+      const result = await delPhoto(currentAd.id, currentAd.images[index].url);
+      console.log(result);
+      const adsIndex = ads.findIndex((ad) => ad.id === currentAd.id);
+      console.log(adsIndex);
+      const newAds = cloneDeep(ads);
+      console.log(newAds);
+      newAds[adsIndex] = result;
+      //(ads[adsIndex] = result);
+      const imgObject = {};
+      result.images.forEach((img, index) => {
+        const key = `fileupload${index + 1}`;
+        imgObject[key] = img.url;
+      });
+      setImages(imgObject);
+    } catch (error) {}
+    console.log(index, currentAd.images[index]);
   };
 
   return (
@@ -231,7 +258,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
           </S.Modal__btn_close>
           <S.Modal__form_newArt onSubmit={(e) => e.preventDefault()}>
             <S.Form__newArt_block>
-              <label for="text">Название</label>
+              <label htmlFor="text">Название</label>
               <S.Form__newArt_input
                 placeholder="Введите название"
                 value={newAdData.title}
@@ -239,7 +266,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
               ></S.Form__newArt_input>
             </S.Form__newArt_block>
             <S.Form__newArt_block>
-              <label for="text">Описание</label>
+              <label htmlFor="text">Описание</label>
               <S.Form__newArt_area
                 placeholder="Введите описание"
                 value={newAdData.description}
@@ -251,10 +278,11 @@ function NewAdv({ modal, handleModal, currentAd }) {
                 Фотографии товара<span>не более 5 фотографий</span>
               </S.Form__newArt_p>
               <S.Form__newArt_bar_img>
-                <S.Form__newArt_img for="fileupload1">
+                <S.Form__newArt_img htmlFor="fileupload1">
                   <S.Form__newArt_img_cover>
                     <img src={getImgSrc("fileupload1")} alt="" />
                   </S.Form__newArt_img_cover>
+
                   <S.inputChange
                     id="fileupload1"
                     name="photo"
@@ -263,9 +291,12 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
-              
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(0)}
+                  style={{ cursor: "pointer" }}
+                />
 
-                <S.Form__newArt_img for="fileupload2">
+                <S.Form__newArt_img htmlFor="fileupload2">
                   <S.Form__newArt_img_cover>
                     <img src={getImgSrc("fileupload2")} alt="" />
                   </S.Form__newArt_img_cover>
@@ -277,8 +308,12 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(1)}
+                  style={{ cursor: "pointer" }}
+                />
 
-                <S.Form__newArt_img for="fileupload3">
+                <S.Form__newArt_img htmlFor="fileupload3">
                   <S.Form__newArt_img_cover>
                     <img src={getImgSrc("fileupload3")} alt="" />
                   </S.Form__newArt_img_cover>
@@ -290,8 +325,12 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                 onClick={() => handleDeletePhoto(2)}
+                  style={{ cursor: "pointer" }}
+                />
 
-                <S.Form__newArt_img for="fileupload4">
+                <S.Form__newArt_img htmlFor="fileupload4">
                   <S.Form__newArt_img_cover>
                     <img src={getImgSrc("fileupload4")} alt="" />
                   </S.Form__newArt_img_cover>
@@ -303,8 +342,12 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(3)}
+                  style={{ cursor: "pointer" }}
+                />
 
-                <S.Form__newArt_img for="fileupload5">
+                <S.Form__newArt_img htmlFor="fileupload5">
                   <S.Form__newArt_img_cover>
                     <img src={getImgSrc("fileupload5")} alt="" />
                   </S.Form__newArt_img_cover>
@@ -316,10 +359,14 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                 onClick={() => handleDeletePhoto(4)}
+                  style={{ cursor: "pointer" }}
+                />
               </S.Form__newArt_bar_img>
             </S.Form__newArt_block>
             <S.Form__newArt_block>
-              <label for="price">Цена</label>
+              <label htmlFor="price">Цена</label>
               <S.Form__newArt_input_price
                 placeholder="₽"
                 value={newAdData.price}

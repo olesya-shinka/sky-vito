@@ -65,7 +65,7 @@ function Comments({ modal, handleModal, currentAd, updateComments }) {
               <>
                 <S.Modal__form_newArt onSubmit={(e) => e.preventDefault()}>
                   <S.Form__newArt_block>
-                    <label for="text">Добавить отзыв</label>
+                    <label htmlFor="text">Добавить отзыв</label>
                     <S.Form__newArt_area
                       placeholder="Введите описание"
                       value={commentData.text}
@@ -88,8 +88,8 @@ function Comments({ modal, handleModal, currentAd, updateComments }) {
 
             <S.Modal__Comments>
               <S.Comments__review>
-                {adComments?.map((el) => (
-                  <S.Comment__item element={el}>
+                {adComments?.map((el, i) => (
+                  <S.Comment__item element={el} key={i + 1}>
                     <S.Comment__left>
                       <S.Comment__img
                         src={`http://127.0.0.1:8090/${el.author?.avatar}`}

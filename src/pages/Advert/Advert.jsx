@@ -105,8 +105,9 @@ function Adv() {
                   </S.Article__img>
                   {currentAd?.images.length > 0 && (
                     <S.Article__img_bar>
-                      {currentAd?.images.map((el,i) => (
-                        <S.Article__img_bar_div key={i + 1}
+                      {currentAd?.images.map((el, i) => (
+                        <S.Article__img_bar_div
+                          key={i + 1}
                           onClick={() =>
                             setMainImage(`http://127.0.0.1:8090/${el.url}`)
                           }

@@ -1,12 +1,13 @@
-import CardsItem from "../../components/CardsItem/CardsItem";
-import * as S from "./styles";
 import { useEffect, useRef, useState } from "react";
-import { getAds } from "../../api/apiAds";
-import logo from "../../assets/icons/logo.png";
-import { Wrapper } from "../../components/Wrapper/Wrapper";
 import { useDispatch, useSelector } from "react-redux";
+import * as S from "./styles";
 import { AdsSelector } from "../../store/selectors/adsSelector";
 import { setAdsList } from "../../store/slices/adsSlice";
+import { getAds } from "../../api/apiAds";
+
+import logo from "../../assets/icons/logo.png";
+import CardsItem from "../../components/CardsItem/CardsItem";
+import { Wrapper } from "../../components/Wrapper/Wrapper";
 
 function Main() {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ function Main() {
       setAdsFiltered(data);
     });
   }, []);
+
+  const [loading, setLoading] = useState();
 
   // search for ads
 

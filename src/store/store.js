@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import userReducer from "./slices/userSlice";
 import { adsApi } from "./services/adsService";
 import adsSlice from "./slices/adsSlice";

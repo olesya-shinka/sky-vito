@@ -293,8 +293,6 @@ export async function patchAd(params, ad_id) {
 
 export async function delPhoto(ad_id, file_url) {
   let accessToken = localStorage.getItem("access_token");
-  console.log(accessToken);
-  // if (params?.file_url) url.searchParams.delete("file_url", params.file_url);
   const searchParams = new URLSearchParams({ file_url });
   let url = new URL(
     `/ads/${ad_id}/image/?${searchParams}`,

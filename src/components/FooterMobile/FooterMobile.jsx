@@ -1,4 +1,4 @@
-import * as S from "./stylesstyles";
+import * as S from "./styles";
 
 function Footer() {
   return (
@@ -6,19 +6,13 @@ function Footer() {
       <S.Footer>
         <S.Footer__container>
           <S.Footer__img>
-            <a href="" target="_self">
-              <img src="img/icon_01.png" alt="home" />
-            </a>
+            <img src="img/icon_01.png" alt="home" />
           </S.Footer__img>
           <S.Footer__img>
-            <a href="" target="_self">
-              <img src="img/icon_02.png" alt="home" />
-            </a>
+            <img src="img/icon_02.png" alt="home" />
           </S.Footer__img>
           <S.Footer__img>
-            <a href="" target="_self">
-              <img src="img/icon_03.png" alt="home" />
-            </a>
+            <img src="img/icon_03.png" alt="home" />
           </S.Footer__img>
         </S.Footer__container>
       </S.Footer>

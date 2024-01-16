@@ -1,7 +1,7 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import CardsItem from "../CardsItem/CardsItem";
-import * as S from "./styles";
 import { useEffect, useState } from "react";
+import * as S from "./styles";
+import CardsItem from "../CardsItem/CardsItem";
 import { getAds, getUserById } from "../../api/apiAds";
 import img from "../../assets/images/no_img.png";
 import { Wrapper } from "../Wrapper/Wrapper";

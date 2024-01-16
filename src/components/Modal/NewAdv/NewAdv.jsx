@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState, React } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import cloneDeep from "lodash.clonedeep";
 import * as S from "./styles";
 import {
@@ -10,11 +9,11 @@ import {
   patchAd,
   postNewAdPhoto,
 } from "../../../api/apiAds";
-import { RiDeleteBin7Line } from "react-icons/ri";
-
 import { setAdsList, setShouldUpdate } from "../../../store/slices/adsSlice";
-import { validatePrice } from "../../../utils/validate";
 import { AdsSelector } from "../../../store/selectors/adsSelector";
+import { validatePrice } from "../../../utils/validate";
+
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 function NewAdv({ modal, handleModal, currentAd }) {
   const [images, setImages] = useState([]);
@@ -26,7 +25,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
     error: false,
   });
   const ads = useSelector(AdsSelector);
-  //const [updateImages, setUpdateImages] = useState([]);
 
   //State at the time of request when creating an ad
   const [requestProcess, setRequestProcess] = useState({
@@ -78,7 +76,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
     currentAd,
     images,
   ]);
-  const [selectedImages, setSelectedImages] = useState([]);
 
   const handleTitle = (e) =>
     setNewAdData((prev) => ({ ...prev, title: e.target.value }));
@@ -197,17 +194,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
         formData.append("file", el);
         requests.push(() => postNewAdPhoto(formData, currentAd.id));
       });
-      // delArray.forEach(async (image, index) => {
-      //   try {
-      //     const imageResponse = await delPhoto({
-      //       ad_id: currentAd,
-      //       file_url: image[index],
-      //     });
-      //     console.log(imageResponse);
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // });
 
       await Promise.all(requests.map((request) => request()));
 
@@ -223,18 +209,11 @@ function NewAdv({ modal, handleModal, currentAd }) {
   };
 
   const handleDeletePhoto = async (index) => {
-    // if (!images[index]) {
-    //   return;
-    // }
     try {
       const result = await delPhoto(currentAd.id, currentAd.images[index].url);
-      console.log(result);
       const adsIndex = ads.findIndex((ad) => ad.id === currentAd.id);
-      console.log(adsIndex);
       const newAds = cloneDeep(ads);
-      console.log(newAds);
       newAds[adsIndex] = result;
-      //(ads[adsIndex] = result);
       const imgObject = {};
       result.images.forEach((img, index) => {
         const key = `fileupload${index + 1}`;
@@ -242,7 +221,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
       });
       setImages(imgObject);
     } catch (error) {}
-    console.log(index, currentAd.images[index]);
   };
 
   return (
@@ -326,7 +304,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                 onClick={() => handleDeletePhoto(2)}
+                  onClick={() => handleDeletePhoto(2)}
                   style={{ cursor: "pointer" }}
                 />
 
@@ -360,7 +338,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
                   />
                 </S.Form__newArt_img>
                 <RiDeleteBin7Line
-                 onClick={() => handleDeletePhoto(4)}
+                  onClick={() => handleDeletePhoto(4)}
                   style={{ cursor: "pointer" }}
                 />
               </S.Form__newArt_bar_img>

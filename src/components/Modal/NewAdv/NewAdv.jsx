@@ -231,10 +231,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
     });
   }
 
-  const handleDeletePhoto = (imageResponse) => {
+  const handleDeletePhoto = (index) => {
     // const updatedImages = [...selectedImages];
     // updatedImages.splice(index, 1);
-    setSelectedImages(imageResponse.file_url);
+    setSelectedImages(currentAd.images[index]);
   };
 
   return (

@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom";
-import CardsItem from "../../components/CardsItem/CardsItem";
-import * as S from "./styles";
-import { getAds, patchUser, postNewUserPhoto } from "../../api/apiAds";
 import { useEffect, useMemo, useState } from "react";
-import { setUser } from "../../store/slices/userSlice";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userSelector } from "../../store/selectors/userSelector";
-import img from "../../assets/images/no_img.png";
-import logo from "../../assets/icons/logo.png";
+import * as S from "./styles";
+
+import { getAds, patchUser, postNewUserPhoto } from "../../api/apiAds";
 import { selectorUpdate } from "../../store/selectors/adsSelector";
 import { setShouldUpdate } from "../../store/slices/adsSlice";
+import { setUser } from "../../store/slices/userSlice";
+import { userSelector } from "../../store/selectors/userSelector";
+
+import img from "../../assets/images/no_img.png";
+import logo from "../../assets/icons/logo.png";
+import CardsItem from "../../components/CardsItem/CardsItem";
 import { validatePhone, validateReg } from "../../utils/validate";
 
 function Profile() {

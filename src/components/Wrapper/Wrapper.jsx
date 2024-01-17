@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { Footer } from "../../components/FooterMobile/styles";
-import * as S from "./styles";
 import { useState } from "react";
-import NewAdv from "../Modal/NewAdv/NewAdv";
 import { useDispatch, useSelector } from "react-redux";
+import * as S from "./styles";
+
 import { removeUser } from "../../store/slices/userSlice";
 import { userSelector } from "../../store/selectors/userSelector";
+import NewAdv from "../Modal/NewAdv/NewAdv";
+import { Footer } from "../../components/FooterMobile/styles";
 
 export function Wrapper({ children }) {
   const user = useSelector(userSelector);

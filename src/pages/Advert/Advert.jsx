@@ -1,18 +1,19 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 import * as S from "./styles";
 import logo from "../../assets/icons/logo.png";
-import { useDispatch, useSelector } from "react-redux";
+import img from "../../assets/images/no_img.png";
+import { setAdsComments, setAdsList } from "../../store/slices/adsSlice";
 import {
   AdsCommentsSelector,
   AdsSelector,
 } from "../../store/selectors/adsSelector";
-import { useEffect, useMemo, useState } from "react";
-import img from "../../assets/images/no_img.png";
-import { setAdsComments, setAdsList } from "../../store/slices/adsSlice";
+import { userSelector } from "../../store/selectors/userSelector";
 import { delAd, getAdComments, getAds } from "../../api/apiAds";
+
 import Comments from "../../components/Modal/Comments/Comments";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
-import { userSelector } from "../../store/selectors/userSelector";
 import NewAdv from "../../components/Modal/NewAdv/NewAdv";
 import FormatTime from "../../components/time/FormatTime";
 
@@ -74,7 +75,7 @@ function Adv() {
   const navigate = useNavigate();
   const deleteAd = async () => {
     delAd(currentAd.id).then(() => {
-      navigate("/");
+      navigate("/profile");
     });
   };
   // edit advert

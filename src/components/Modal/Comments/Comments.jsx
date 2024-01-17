@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
+import { useMemo, useState } from "react";
 import * as S from "./styles";
 import { AdsCommentsSelector } from "../../../store/selectors/adsSelector";
-import { useMemo, useState } from "react";
 import { newComment } from "../../../api/apiAds";
+
 import FormatTime from "../../time/FormatTime";
 
 function Comments({ modal, handleModal, currentAd, updateComments }) {

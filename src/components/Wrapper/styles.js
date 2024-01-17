@@ -75,6 +75,7 @@ export const Header__btn_main_enter = styled.button`
   color: #ffffff;
   font-size: 16px;
   line-height: 1;
+  cursor: pointer;
 `;
 
 export const HeaderButton = styled.button`

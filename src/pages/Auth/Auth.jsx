@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
-import * as S from "./styles";
-import { Footer } from "../../components/FooterMobile/styles";
 import { useMemo, useState } from "react";
+import * as S from "./styles";
+import { useDispatch } from "react-redux";
 import { login } from "../../api/apiAuth";
 import { getUser } from "../../api/apiAds";
-import { useDispatch } from "react-redux";
+
 import { setUser } from "../../store/slices/userSlice";
 import namelogo from "../../assets/icons/logo_modal.png";
 import { validateEmail } from "../../utils/validate";
+import { Footer } from "../../components/FooterMobile/styles";
 
 function Auth() {
   const dispatch = useDispatch();

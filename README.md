@@ -27,6 +27,7 @@ npm start
 - Redux + Redux Toolkit
 - Router DOM, реализация routing
 - react-hook-form
+- fetchBaseQuery
 
 # Структура приложения и функционал
 

@@ -1,4 +1,8 @@
 import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+
+import { setUser } from "./store/slices/userSlice";
 import Main from "./pages/Main/Main";
 import Profile from "./pages/Profile/Profile";
 import Adv from "./pages//Advert/Advert";
@@ -6,9 +10,6 @@ import Auth from "./pages/Auth/Auth";
 import Reg from "./pages/Auth/Reg";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Seller from "./components/Seller-profile/Seller";
-import { useDispatch } from "react-redux";
-import { setUser } from "./store/slices/userSlice";
-import { useEffect } from "react";
 
 function AppRoutes() {
   const dispatch = useDispatch();

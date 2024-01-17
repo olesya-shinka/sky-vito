@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "./styles";
 import { AdsSelector } from "../../store/selectors/adsSelector";
 import { setAdsList } from "../../store/slices/adsSlice";
@@ -19,8 +21,6 @@ function Main() {
       setAdsFiltered(data);
     });
   }, []);
-
-  const [loading, setLoading] = useState();
 
   // search for ads
 

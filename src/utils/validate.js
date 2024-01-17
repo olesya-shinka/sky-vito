@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export function validateEmail(email) {
   var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);

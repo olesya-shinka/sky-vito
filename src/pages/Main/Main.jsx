@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as S from "./styles";
 import { AdsSelector } from "../../store/selectors/adsSelector";
@@ -21,6 +21,8 @@ function Main() {
       setAdsFiltered(data);
     });
   }, []);
+
+
 
   // search for ads
 
@@ -49,6 +51,16 @@ function Main() {
     setSearchData("");
     setAdsFiltered(ads);
   };
+
+  const { error } = useState(false);
+  if (error) {
+    return (
+      <h3>
+        Не удалось загрузить oбъявления, попробуйте позже
+        {JSON.stringify(error.data, null, 2)}
+      </h3>
+    );
+  }
 
   return (
     <Wrapper>
@@ -81,13 +93,15 @@ function Main() {
         </S.Main__search>
         <S.Main__container>
           <S.Main__header>Объявления</S.Main__header>
-          <S.Main__content>
-            <S.Content__cards>
-              {adsFiltered?.map((el, i) => (
-                <CardsItem key={i} element={el} />
-              ))}
-            </S.Content__cards>
-          </S.Main__content>
+          <SkeletonTheme color="#333" highlightColor="#f2f1f0">
+            <S.Main__content>
+              <S.Content__cards>
+                {adsFiltered?.map((el, i) => (
+                  <CardsItem key={i} element={el} />
+                ))}
+              </S.Content__cards>
+            </S.Main__content>
+          </SkeletonTheme>
         </S.Main__container>
       </S.Main>
     </Wrapper>

@@ -22,8 +22,6 @@ function Main() {
     });
   }, []);
 
-
-
   // search for ads
 
   const [searchData, setSearchData] = useState("");

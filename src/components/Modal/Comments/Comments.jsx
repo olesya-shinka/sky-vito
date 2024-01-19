@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import * as S from "./styles";
 import { AdsCommentsSelector } from "../../../store/selectors/adsSelector";
 import { newComment } from "../../../api/apiAds";
+import img from "../../../assets/images/no_img.png";
 
 import FormatTime from "../../time/FormatTime";
 
@@ -93,7 +94,11 @@ function Comments({ modal, handleModal, currentAd, updateComments }) {
                   <S.Comment__item element={el} key={i + 1}>
                     <S.Comment__left>
                       <S.Comment__img
-                        src={`http://127.0.0.1:8090/${el.author?.avatar}`}
+                        src={
+                          !el.author?.avatar
+                            ? img
+                            : `http://127.0.0.1:8090/${el.author?.avatar}`
+                        }
                       ></S.Comment__img>
                     </S.Comment__left>
                     <S.Comment__right>

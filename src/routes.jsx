@@ -11,6 +11,7 @@ import Auth from "./pages/Auth/Auth";
 import Reg from "./pages/Auth/Reg";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Seller from "./components/Seller-profile/Seller";
+import NotFound from "./pages/notFound/NotFound";
 
 function AppRoutes() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function AppRoutes() {
       <Route path="/" element={<Main />} />
       <Route path="/login" element={<Auth />} />
       <Route path="/reg" element={<Reg />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

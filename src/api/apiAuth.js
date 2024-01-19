@@ -16,7 +16,7 @@ export async function regUser(params) {
     }
   );
   if (!response.ok) {
-    throw new Error("Ошибка сервера");
+    throw new Error("Пользователь с таким email уже зарегистрирован");
   }
   const data = await response.json();
   return data;
@@ -32,7 +32,7 @@ export async function login(params) {
     }),
   });
   if (!response.ok) {
-    throw new Error("Ошибка сервера");
+    throw new Error("Неверный логин или пароль");
   }
   const data = await response.json();
   localStorage.setItem("access_token", data.access_token);

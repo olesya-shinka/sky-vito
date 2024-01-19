@@ -32,25 +32,31 @@ function Auth() {
   const handlePassword = (e) =>
     setLogindata((prev) => ({ ...prev, password: e.target.value }));
 
-  const loginUser = () => {
+  const loginUser = async () => {
     if (!validateEmail(logindata.email)) {
       setLogindata((prev) => ({ ...prev, error: "Некорректный e-mail" }));
       return;
     }
-
-    login({
-      email: logindata.email,
-      password: logindata.password,
-    })
-      .then(() => {
-        getUser().then((data) => {
-          if (data) {
-            setCurrentUser(data);
-            localStorage.setItem("user", JSON.stringify(data));
-          }
-        });
+    try {
+      const data = await login({
+        email: logindata.email,
+        password: logindata.password,
       })
-      .then(() => navigate(`/`));
+        .then(() => {
+          getUser().then((data) => {
+            if (data) {
+              setCurrentUser(data);
+              localStorage.setItem("user", JSON.stringify(data));
+            }
+          });
+        })
+        .then(() => navigate(`/`));
+    } catch (error) {
+      setLogindata((prev) => ({
+        ...prev,
+        error: error.message,
+      }));
+    }
   };
   return (
     <S.Wrapper>

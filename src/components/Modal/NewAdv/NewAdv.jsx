@@ -221,7 +221,9 @@ function NewAdv({ modal, handleModal, currentAd }) {
         imgObject[key] = img.url;
       });
       setImages(imgObject);
-    } catch (error) {}
+    } catch (error) {
+      setImages({ error: "Не удалось выполнить действие с изображением" });
+    }
   };
 
   return (

@@ -16,7 +16,7 @@ import { delAd, getAdComments, getAds } from "../../api/apiAds";
 import Comments from "../../components/Modal/Comments/Comments";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import FormatTime from "../../components/time/FormatTime";
-import EditAdv from "../../components/Modal/NewAdv/EditAdv";
+import EditAdv from "../../components/Modal/Adv/EditAdv";
 
 function Adv() {
   const [mainImage, setMainImage] = useState("");

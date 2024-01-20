@@ -5,7 +5,7 @@ import * as S from "./styles";
 
 import { removeUser } from "../../store/slices/userSlice";
 import { userSelector } from "../../store/selectors/userSelector";
-import NewAdv from "../Modal/NewAdv/NewAdv";
+import NewAdv from "../Modal/Adv/NewAdv";
 import { Footer } from "../../components/FooterMobile/styles";
 
 export function Wrapper({ children }) {

@@ -16,7 +16,7 @@ import { validatePrice } from "../../../utils/validate";
 
 import { RiDeleteBin7Line } from "react-icons/ri";
 
-function NewAdv({ modal, handleModal, currentAd }) {
+function EditAdv({ modal, handleModal, currentAd }) {
   const [images, setImages] = useState([]);
   //Ad details
   const [newAdData, setNewAdData] = useState({
@@ -209,6 +209,23 @@ function NewAdv({ modal, handleModal, currentAd }) {
     }
   };
 
+  const handleDeletePhoto = async (index) => {
+    try {
+      const result = await delPhoto(currentAd.id, currentAd.images[index].url);
+      const adsIndex = ads.findIndex((ad) => ad.id === currentAd.id);
+      const newAds = cloneDeep(ads);
+      newAds[adsIndex] = result;
+      const imgObject = {};
+      result.images.forEach((img, index) => {
+        const key = `fileupload${index + 1}`;
+        imgObject[key] = img.url;
+      });
+      setImages(imgObject);
+    } catch (error) {
+      setImages({ error: "Не удалось выполнить действие с изображением" });
+    }
+  };
+
   return (
     <S.Wrapper style={{ visibility: modal ? "visible" : "hidden" }}>
       <S.Backdrop onClick={handleModal} />
@@ -255,6 +272,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(0)}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img htmlFor="fileupload2">
                   <S.Form__newArt_img_cover>
@@ -268,6 +289,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(1)}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img htmlFor="fileupload3">
                   <S.Form__newArt_img_cover>
@@ -281,6 +306,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(2)}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img htmlFor="fileupload4">
                   <S.Form__newArt_img_cover>
@@ -294,6 +323,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(3)}
+                  style={{ cursor: "pointer" }}
+                />
 
                 <S.Form__newArt_img htmlFor="fileupload5">
                   <S.Form__newArt_img_cover>
@@ -307,6 +340,10 @@ function NewAdv({ modal, handleModal, currentAd }) {
                     onChange={handleAdPhoto}
                   />
                 </S.Form__newArt_img>
+                <RiDeleteBin7Line
+                  onClick={() => handleDeletePhoto(4)}
+                  style={{ cursor: "pointer" }}
+                />
               </S.Form__newArt_bar_img>
             </S.Form__newArt_block>
             <S.Form__newArt_block>
@@ -343,4 +380,4 @@ function NewAdv({ modal, handleModal, currentAd }) {
   );
 }
 
-export default NewAdv;
+export default EditAdv;

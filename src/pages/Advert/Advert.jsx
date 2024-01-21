@@ -18,7 +18,6 @@ import { Wrapper } from "../../components/Wrapper/Wrapper";
 import FormatTime from "../../components/time/FormatTime";
 import AdvModal from "../../components/Modal/Adv/AdvModal";
 
-
 function Adv() {
   const [mainImage, setMainImage] = useState("");
 

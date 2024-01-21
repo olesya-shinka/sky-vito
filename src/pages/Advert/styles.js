@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 export const Main__photo = styled.img``;
 export const Photo = styled.img`
@@ -13,9 +13,6 @@ export const Main__container = styled.div`
   max-width: 1178px;
   margin: 0 auto;
   padding: 0px 10px 79px;
-  @media screen and (max-width: 768px) {
-    padding: 0 20px 0;
-  }
 `;
 
 export const Main__menu = styled.div`
@@ -85,7 +82,6 @@ export const Article__content = styled.div`
   align-items: top;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
-  justify-content: center;
   @media screen and (max-width: 768px) {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -142,7 +138,58 @@ export const Article__fill_img = styled.div`
     border-top: 2px solid #0080c1;
     border-left: 2px solid #0080c1;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 590px) {
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: relative;
+    &::before {
+      content: "";
+      display: block;
+      width: 23px;
+      height: 23px;
+      background-color: transparent;
+      border-top: 2px solid #000000;
+      border-left: 2px solid #000000;
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+      position: absolute;
+      top: 24px;
+      left: 32px;
+      cursor: pointer;
+    }
+  }
+`;
+export const LinkBack = styled(Link)`
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  &:hover::before {
+    border-top: 2px solid #0080c1;
+    border-left: 2px solid #0080c1;
+  }
+  @media screen and (max-width: 590px) {
     max-width: 100%;
     width: 100%;
     overflow: hidden;
@@ -189,11 +236,9 @@ export const Article__img = styled.div`
     -o-object-fit: cover;
     object-fit: cover;
   }
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    min-width: 320px;
-    height: auto;
-    min-height: 320px;
+  @media screen and (max-width: 590px) {
+    width: 320px;
+    height: 320px;
     margin: 0 0px;
   }
 `;
@@ -274,10 +319,10 @@ export const Article__img_bar_div = styled.div`
 export const Photo__img_bar = styled.img``;
 export const Article__right = styled.div`
   max-width: 621px;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 590px) {
     max-width: 100%;
     width: 100%;
-    padding: 0 20px;
+
   }
 `;
 export const Article__block = styled.div`

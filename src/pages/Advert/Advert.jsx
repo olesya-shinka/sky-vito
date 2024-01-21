@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import * as S from "./styles";
+import * as s from "../../components/Wrapper/styles";
 import logo from "../../assets/icons/logo.png";
 import img from "../../assets/images/no_img.png";
 import { setAdsComments, setAdsList } from "../../store/slices/adsSlice";
@@ -17,6 +18,7 @@ import Comments from "../../components/Modal/Comments/Comments";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import FormatTime from "../../components/time/FormatTime";
 import AdvModal from "../../components/Modal/Adv/AdvModal";
+
 
 function Adv() {
   const [mainImage, setMainImage] = useState("");
@@ -102,6 +104,7 @@ function Adv() {
             <S.Article__content>
               <S.Article__left>
                 <S.Article__fill_img>
+                  <S.LinkBack to={`/`} />
                   <S.Article__img>
                     <S.Main__photo src={mainImage} />
                   </S.Article__img>

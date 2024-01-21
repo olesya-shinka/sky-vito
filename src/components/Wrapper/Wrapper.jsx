@@ -7,6 +7,7 @@ import { removeUser } from "../../store/slices/userSlice";
 import { userSelector } from "../../store/selectors/userSelector";
 import { Footer } from "../../components/FooterMobile/styles";
 import AdvModal from "../Modal/Adv/AdvModal";
+import logoMob from "../../assets/icons/logo-mob.png";
 
 export function Wrapper({ children }) {
   const user = useSelector(userSelector);
@@ -26,6 +27,7 @@ export function Wrapper({ children }) {
     <S.Wrapper>
       <S.Container>
         <S.Header>
+          <S.HeaderImg src={logoMob} />
           <S.Header__nav>
             {user.id ? (
               <>

@@ -227,8 +227,7 @@ export const Main__header = styled.h2`
     line-height: 29px;
     color: #000000;
     margin-bottom: 20px;
-    text-align: center;
-    position: relative;
+
     &::before {
       content: "";
       display: block;
@@ -259,6 +258,7 @@ export const Main__content = styled.div`
     left: 0;
     top: 134px;
     bottom: 84px;
+    margin-left: 10px;
   }
 `;
 
@@ -277,4 +277,12 @@ export const Content__cards = styled.div`
   scrollbar-color: #ffffff #2e2e2e;
   scrollbar-width: thin;
   scrollbar-width: 0px;
+  @media screen and (max-width: 590px) {
+    width: 100%;
+    display: grid;
+    grid-auto-rows: 300px;
+    grid-template-columns: repeat(2, 140px);
+    grid-gap: 20px 16px;
+    -webkit-box-pack: center;
+  }
 `;

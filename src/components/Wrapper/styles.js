@@ -20,8 +20,7 @@ export const Container = styled.div`
   background-color: #ffffff;
   @media screen and (max-width: 590px) {
     width: 100%;
-    min-width: 320px;
-    min-height: 100vh;
+
     background-color: #ffffff;
   }
 `;
@@ -29,9 +28,6 @@ export const Container = styled.div`
 export const Header = styled.header`
   background-color: #009ee4;
   @media screen and (max-width: 590px) {
-    display: none;
-  }
-  @media screen and (max-width: 620px) {
     width: 100%;
     height: 55px;
     -webkit-box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.05);
@@ -41,7 +37,12 @@ export const Header = styled.header`
     top: 0;
     z-index: 3;
   }
+
 `;
+
+export const HeaderImg = styled.div`
+
+`
 
 export const Header__nav = styled.nav`
   max-width: 1178px;
@@ -57,12 +58,13 @@ export const Header__nav = styled.nav`
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: end;
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 590px) {
     height: 55px;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: start;
     padding: 0 20px;
+    
   }
 `;
 
@@ -92,13 +94,12 @@ export const HeaderButton = styled.button`
 
 export const Header__logo = styled.div`
   display: none;
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 590px) {
     display: block;
   }
 `;
 export const Logo__mob_link = styled.a``;
-export const Logo__mob_img = styled.img`
-  background-image:;
+export const Logo__mob_img = styled.img`;
 `;
 export const Header__btn_putAd = styled(HeaderButton)`
   cursor: pointer;

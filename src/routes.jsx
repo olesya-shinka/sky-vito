@@ -34,7 +34,7 @@ function AppRoutes() {
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="/seller/:id" element={<Seller />} />
-      <Route path="/seller/*" element={<Seller />} />
+      <Route path="/seller/*" element={<NotFound />} />
       <Route path="/adv/:id" element={<Adv />} />
       <Route path="/" element={<Main />} />
       <Route path="/login" element={<Auth />} />

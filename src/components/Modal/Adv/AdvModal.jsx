@@ -16,7 +16,7 @@ import { validatePrice } from "../../../utils/validate";
 
 import { RiDeleteBin7Line } from "react-icons/ri";
 
-function EditAdv({ modal, handleModal, currentAd }) {
+function AdvModal({ modal, handleModal, currentAd }) {
   const [images, setImages] = useState([]);
   //Ad details
   const [newAdData, setNewAdData] = useState({
@@ -380,4 +380,4 @@ function EditAdv({ modal, handleModal, currentAd }) {
   );
 }
 
-export default EditAdv;
+export default AdvModal;

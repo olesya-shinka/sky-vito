@@ -5,8 +5,8 @@ import * as S from "./styles";
 
 import { removeUser } from "../../store/slices/userSlice";
 import { userSelector } from "../../store/selectors/userSelector";
-import NewAdv from "../Modal/Adv/NewAdv";
 import { Footer } from "../../components/FooterMobile/styles";
+import AdvModal from "../Modal/Adv/AdvModal";
 
 export function Wrapper({ children }) {
   const user = useSelector(userSelector);
@@ -58,7 +58,7 @@ export function Wrapper({ children }) {
         {children}
         <Footer />
       </S.Container>
-      {modal && <NewAdv modal={modal} handleModal={handleModal} />}
+      {modal && <AdvModal modal={modal} handleModal={handleModal} />}
     </S.Wrapper>
   );
 }

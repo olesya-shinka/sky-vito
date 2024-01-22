@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as S from "./styles";
 import CardsItem from "../CardsItem/CardsItem";
@@ -26,7 +26,7 @@ function Seller() {
           }
         });
       } else {
-         navigate("/not-found");
+        navigate("/not-found");
       }
     });
   }, []);

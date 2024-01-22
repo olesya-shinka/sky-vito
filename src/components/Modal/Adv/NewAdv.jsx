@@ -1,10 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState, React } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as S from "./styles";
 import { getAds, newAd, postNewAdPhoto } from "../../../api/apiAds";
 import { setAdsList, setShouldUpdate } from "../../../store/slices/adsSlice";
-import { AdsSelector } from "../../../store/selectors/adsSelector";
 import { validatePrice } from "../../../utils/validate";
 
 import { RiDeleteBin7Line } from "react-icons/ri";
@@ -20,7 +19,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
   });
   const dispatch = useDispatch();
   const setAds = (value) => dispatch(setAdsList(value || []));
-  const ads = useSelector(AdsSelector);
 
   //State at the time of request when creating an ad
   const [requestProcess, setRequestProcess] = useState({

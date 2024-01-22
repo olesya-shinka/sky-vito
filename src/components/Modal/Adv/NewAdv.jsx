@@ -83,17 +83,17 @@ function NewAdv({ modal, handleModal, currentAd }) {
     event.preventDefault();
     const selectedFile = event.target.files[0];
 
-    if (!selectedFile) {
-    } else {
-      setImages((prev) => ({ ...prev, [event.target.id]: selectedFile }));
+    if (selectedFile) {
+      setImages([...images, { selectedFile }]);
     }
   };
 
   const getImgSrc = (key) => {
     if (images[key]) {
-      if (typeof images[key] === "string")
+      if (typeof images[key] === "string") {
         return `http://127.0.0.1:8090/${images[key]}`;
-      else return URL.createObjectURL(images[key]);
+      }
+      return URL.createObjectURL(images[key].selectedFile);
     }
     return " ";
   };
@@ -106,8 +106,8 @@ function NewAdv({ modal, handleModal, currentAd }) {
         imgObject[key] = img.url;
       });
 
-      setImages(imgObject);
-    } else setImages({});
+      setImages([...images, imgObject]);
+    } else setImages([]);
   }, [currentAd?.id]);
 
   const makeNewAd = async () => {
@@ -126,40 +126,30 @@ function NewAdv({ modal, handleModal, currentAd }) {
         price: newAdData.price,
       });
 
-      const keys = Object.keys(images);
-      if (keys.length > 0) {
-        for (const key in images) {
+      if (images.length > 0) {
+        images.forEach(async (elem) => {
           const formData = new FormData();
-          formData.append("file", images[key]);
+          formData.append("file", elem.selectedFile);
           await postNewAdPhoto(formData, adv.id);
-        }
+        });
       }
-      await getAds().then((data) => {
+      getAds().then((data) => {
         setAds(data);
+        setRequestProcess({ loading: false, error: false });
+        dispatch(setShouldUpdate(true));
+        handleModal();
+        if (window.location.pathname === `/`) {
+          window.location.pathname = `/`;
+        }
       });
-      setRequestProcess({ loading: false, error: false });
-      dispatch(setShouldUpdate(true));
-      handleModal();
     } catch (error) {
       setRequestProcess({ loading: false, error: error.message });
     }
   };
 
   const handleDelete = (index) => {
-    // const deleteImage = Array.isArray(images)
-    //   ? images.filter((i) => i !== index)
-    //   : [];
-    // console.log(deleteImage);//выходит пустой массив
-    const deleteImage = images.filter((i) => i !== index) ?? null;
+    const deleteImage = images.filter((elem, i) => i !== index);
     setImages(deleteImage);
-    // setImages((prev) => [
-    //   ...prev.slice(0, index),
-    //   undefined,
-    //   ...prev.slice(index + 1),
-    // ]);
-    // const deleteImage = [...images];
-    // deleteImage.splice(index, 1);
-    // setImages(deleteImage);//не итерируется
   };
 
   return (
@@ -197,7 +187,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
               <S.Form__newArt_bar_img>
                 <S.Form__newArt_img htmlFor="fileupload1">
                   <S.Form__newArt_img_cover>
-                    <img src={getImgSrc("fileupload1")} alt="" />
+                    <img src={getImgSrc(0)} alt="" />
                   </S.Form__newArt_img_cover>
 
                   <S.inputChange
@@ -215,7 +205,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
 
                 <S.Form__newArt_img htmlFor="fileupload2">
                   <S.Form__newArt_img_cover>
-                    <img src={getImgSrc("fileupload2")} alt="" />
+                    <img src={getImgSrc(1)} alt="" />
                   </S.Form__newArt_img_cover>
                   <S.inputChange
                     id="fileupload2"
@@ -232,7 +222,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
 
                 <S.Form__newArt_img htmlFor="fileupload3">
                   <S.Form__newArt_img_cover>
-                    <img src={getImgSrc("fileupload3")} alt="" />
+                    <img src={getImgSrc(2)} alt="" />
                   </S.Form__newArt_img_cover>
                   <S.inputChange
                     id="fileupload3"
@@ -249,7 +239,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
 
                 <S.Form__newArt_img htmlFor="fileupload4">
                   <S.Form__newArt_img_cover>
-                    <img src={getImgSrc("fileupload4")} alt="" />
+                    <img src={getImgSrc(3)} alt="" />
                   </S.Form__newArt_img_cover>
                   <S.inputChange
                     id="fileupload4"
@@ -266,7 +256,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
 
                 <S.Form__newArt_img htmlFor="fileupload5">
                   <S.Form__newArt_img_cover>
-                    <img src={getImgSrc("fileupload5")} alt="" />
+                    <img src={getImgSrc(4)} alt="" />
                   </S.Form__newArt_img_cover>
                   <S.inputChange
                     id="fileupload5"

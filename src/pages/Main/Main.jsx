@@ -16,6 +16,7 @@ function Main() {
   const dispatch = useDispatch();
   const ads = useSelector(AdsSelector);
   const setAds = (value) => dispatch(setAdsList(value || []));
+  const [adsFiltered, setAdsFiltered] = useState([]);
   useEffect(() => {
     getAds().then((data) => {
       setAds(data);
@@ -28,8 +29,6 @@ function Main() {
   const [searchData, setSearchData] = useState("");
 
   const handleSearchData = (e) => setSearchData(e.target.value);
-
-  const [adsFiltered, setAdsFiltered] = useState([]);
 
   const searchAds = () => {
     if (!searchData) {

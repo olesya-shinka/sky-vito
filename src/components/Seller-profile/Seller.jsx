@@ -15,7 +15,7 @@ function Seller() {
   const [user, setUser] = useState();
   useEffect(() => {
     if (!params.id) {
-      return navigate("/*");
+      navigate("/");
     }
     getUserById(params.id).then((data) => {
       if (data) {
@@ -23,10 +23,10 @@ function Seller() {
         getAds({ user_id: data.id }).then((userAdsData) => {
           if (userAdsData) {
             setUserAds(userAdsData);
-          } else {
-            return <Navigate to={`/*`} />;
           }
         });
+      } else {
+         navigate("/not-found");
       }
     });
   }, []);

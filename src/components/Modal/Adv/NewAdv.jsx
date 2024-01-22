@@ -1,17 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useState, React } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import cloneDeep from "lodash.clonedeep";
+import { useDispatch, useSelector } from "react-redux";
 import * as S from "./styles";
-import {
-  delPhoto,
-  getAds,
-  newAd,
-  patchAd,
-  postNewAdPhoto,
-} from "../../../api/apiAds";
+import { getAds, newAd, postNewAdPhoto } from "../../../api/apiAds";
 import { setAdsList, setShouldUpdate } from "../../../store/slices/adsSlice";
-//import { AdsSelector } from "../../../store/selectors/adsSelector";
+import { AdsSelector } from "../../../store/selectors/adsSelector";
 import { validatePrice } from "../../../utils/validate";
 
 import { RiDeleteBin7Line } from "react-icons/ri";
@@ -27,7 +20,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
   });
   const dispatch = useDispatch();
   const setAds = (value) => dispatch(setAdsList(value || []));
-  // const ads = useSelector(AdsSelector);
+  const ads = useSelector(AdsSelector);
 
   //State at the time of request when creating an ad
   const [requestProcess, setRequestProcess] = useState({
@@ -143,7 +136,7 @@ function NewAdv({ modal, handleModal, currentAd }) {
           await postNewAdPhoto(formData, adv.id);
         }
       }
-      getAds().then((data) => {
+      await getAds().then((data) => {
         setAds(data);
       });
       setRequestProcess({ loading: false, error: false });
@@ -158,77 +151,6 @@ function NewAdv({ modal, handleModal, currentAd }) {
     const deleteImage = images.filter((image, i) => i !== index);
     setImages(deleteImage);
   };
-
-  //Editing an ad
-
-  // const changeAd = async () => {
-  //   if (!validatePrice(newAdData.price)) {
-  //     setNewAdData((prev) => ({
-  //       ...prev,
-  //       error: "Здесь должны быть только цифры",
-  //     }));
-  //     return;
-  //   }
-
-  //   try {
-  //     await patchAd(
-  //       {
-  //         title: newAdData.title,
-  //         description: newAdData.description,
-  //         price: newAdData.price,
-  //         error: false,
-  //       },
-  //       currentAd.id
-  //     );
-
-  //     const addArray = [];
-  //     const delArray = [];
-
-  //     Object.values(images).forEach((el) => {
-  //       if (!currentAd?.images?.find((item) => item.url === el))
-  //         addArray.push(el);
-  //     });
-  //     const requests = [];
-  //     currentAd?.images?.forEach((el) => {
-  //       if (!Object.values(images).find((item) => item === el.url))
-  //         delArray.push(el.url);
-  //     });
-
-  //     addArray.forEach((el) => {
-  //       const formData = new FormData();
-  //       formData.append("file", el);
-  //       requests.push(() => postNewAdPhoto(formData, currentAd.id));
-  //     });
-
-  //     await Promise.all(requests.map((request) => request()));
-
-  //     setRequestProcess({ loading: false, error: false });
-  //     await getAds().then((data) => {
-  //       setAds(data);
-  //     });
-  //     dispatch(setShouldUpdate(true));
-  //     handleModal();
-  //   } catch (error) {
-  //     setRequestProcess({ loading: false, error: error.message });
-  //   }
-  // };
-
-  // const handleDelete = async (index) => {
-  //   try {
-  //     const result = await delPhoto(currentAd.id, currentAd.images[index].url);
-  //     const adsIndex = ads.findIndex((ad) => ad.id === currentAd.id);
-  //     const newAds = cloneDeep(ads);
-  //     newAds[adsIndex] = result;
-  //     const imgObject = {};
-  //     result.images.forEach((img, index) => {
-  //       const key = `fileupload${index + 1}`;
-  //       imgObject[key] = img.url;
-  //     });
-  //     setImages(imgObject);
-  //   } catch (error) {
-  //     setImages({ error: "Не удалось выполнить действие с изображением" });
-  //   }
-  // };
 
   return (
     <S.Wrapper style={{ visibility: modal ? "visible" : "hidden" }}>

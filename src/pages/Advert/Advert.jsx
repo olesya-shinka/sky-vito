@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import * as S from "./styles";
-import * as s from "../../components/Wrapper/styles";
 import logo from "../../assets/icons/logo.png";
 import img from "../../assets/images/no_img.png";
 import { setAdsComments, setAdsList } from "../../store/slices/adsSlice";
@@ -78,7 +77,7 @@ function Adv() {
   const navigate = useNavigate();
   const deleteAd = async () => {
     delAd(currentAd.id).then(() => {
-      navigate("/profile");
+      navigate("/");
     });
   };
   // edit advert

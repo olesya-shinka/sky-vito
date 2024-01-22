@@ -6,7 +6,6 @@ import * as S from "./styles";
 import {
   delPhoto,
   getAds,
-  newAd,
   patchAd,
   postNewAdPhoto,
 } from "../../../api/apiAds";
@@ -117,41 +116,6 @@ function EditAdv({ modal, handleModal, currentAd }) {
     } else setImages({});
   }, [currentAd?.id]);
 
-  // const makeNewAd = async () => {
-  //   if (!validatePrice(newAdData.price)) {
-  //     setNewAdData((prev) => ({
-  //       ...prev,
-  //       error: "Здесь должны быть только цифры",
-  //     }));
-  //     return;
-  //   }
-  //   setRequestProcess({ loading: true, error: false });
-  //   try {
-  //     const adv = await newAd({
-  //       title: newAdData.title,
-  //       description: newAdData.description,
-  //       price: newAdData.price,
-  //     });
-
-  //     const keys = Object.keys(images);
-  //     if (keys.length > 0) {
-  //       for (const key in images) {
-  //         const formData = new FormData();
-  //         formData.append("file", images[key]);
-  //         await postNewAdPhoto(formData, adv.id);
-  //       }
-  //     }
-  //     getAds().then((data) => {
-  //       setAds(data);
-  //     });
-  //     setRequestProcess({ loading: false, error: false });
-  //     dispatch(setShouldUpdate(true));
-  //     handleModal();
-  //   } catch (error) {
-  //     setRequestProcess({ loading: false, error: error.message });
-  //   }
-  // };
-
   //Editing an ad
 
   const dispatch = useDispatch();
@@ -208,9 +172,6 @@ function EditAdv({ modal, handleModal, currentAd }) {
       setRequestProcess({ loading: false, error: error.message });
     }
   };
-
-  // const newImages = images.filter((image, i, index) => i !== index);
-  // setImages(newImages);
 
   const handleDeletePhoto = async (index) => {
     try {

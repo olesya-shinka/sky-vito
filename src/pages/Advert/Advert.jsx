@@ -17,7 +17,7 @@ import { delAd, getAdComments, getAds } from "../../api/apiAds";
 import Comments from "../../components/Modal/Comments/Comments";
 import { Wrapper } from "../../components/Wrapper/Wrapper";
 import FormatTime from "../../components/time/FormatTime";
-import AdvModal from "../../components/Modal/Adv/AdvModal";
+import EditAdv from "../../components/Modal/Adv/EditAdv";
 
 
 function Adv() {
@@ -230,7 +230,7 @@ function Adv() {
           updateComments={updateComments}
         />
         {changeAdModal && (
-          <AdvModal
+          <EditAdv
             handleModal={openModal}
             modal={changeAdModal}
             currentAd={currentAd}

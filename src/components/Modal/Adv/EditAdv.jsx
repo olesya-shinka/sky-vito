@@ -16,7 +16,7 @@ import { validatePrice } from "../../../utils/validate";
 
 import { RiDeleteBin7Line } from "react-icons/ri";
 
-function AdvModal({ modal, handleModal, currentAd }) {
+function EditAdv({ modal, handleModal, currentAd }) {
   const [images, setImages] = useState([]);
   //Ad details
   const [newAdData, setNewAdData] = useState({
@@ -117,40 +117,40 @@ function AdvModal({ modal, handleModal, currentAd }) {
     } else setImages({});
   }, [currentAd?.id]);
 
-  const makeNewAd = async () => {
-    if (!validatePrice(newAdData.price)) {
-      setNewAdData((prev) => ({
-        ...prev,
-        error: "Здесь должны быть только цифры",
-      }));
-      return;
-    }
-    setRequestProcess({ loading: true, error: false });
-    try {
-      const adv = await newAd({
-        title: newAdData.title,
-        description: newAdData.description,
-        price: newAdData.price,
-      });
+  // const makeNewAd = async () => {
+  //   if (!validatePrice(newAdData.price)) {
+  //     setNewAdData((prev) => ({
+  //       ...prev,
+  //       error: "Здесь должны быть только цифры",
+  //     }));
+  //     return;
+  //   }
+  //   setRequestProcess({ loading: true, error: false });
+  //   try {
+  //     const adv = await newAd({
+  //       title: newAdData.title,
+  //       description: newAdData.description,
+  //       price: newAdData.price,
+  //     });
 
-      const keys = Object.keys(images);
-      if (keys.length > 0) {
-        for (const key in images) {
-          const formData = new FormData();
-          formData.append("file", images[key]);
-          await postNewAdPhoto(formData, adv.id);
-        }
-      }
-      getAds().then((data) => {
-        setAds(data);
-      });
-      setRequestProcess({ loading: false, error: false });
-      dispatch(setShouldUpdate(true));
-      handleModal();
-    } catch (error) {
-      setRequestProcess({ loading: false, error: error.message });
-    }
-  };
+  //     const keys = Object.keys(images);
+  //     if (keys.length > 0) {
+  //       for (const key in images) {
+  //         const formData = new FormData();
+  //         formData.append("file", images[key]);
+  //         await postNewAdPhoto(formData, adv.id);
+  //       }
+  //     }
+  //     getAds().then((data) => {
+  //       setAds(data);
+  //     });
+  //     setRequestProcess({ loading: false, error: false });
+  //     dispatch(setShouldUpdate(true));
+  //     handleModal();
+  //   } catch (error) {
+  //     setRequestProcess({ loading: false, error: error.message });
+  //   }
+  // };
 
   //Editing an ad
 
@@ -208,6 +208,9 @@ function AdvModal({ modal, handleModal, currentAd }) {
       setRequestProcess({ loading: false, error: error.message });
     }
   };
+
+  // const newImages = images.filter((image, i, index) => i !== index);
+  // setImages(newImages);
 
   const handleDeletePhoto = async (index) => {
     try {
@@ -360,7 +363,7 @@ function AdvModal({ modal, handleModal, currentAd }) {
               </p>
             </S.Form__newArt_block>
             <S.Form__newArt__btn_pub
-              onClick={currentAd ? changeAd : makeNewAd}
+              onClick={currentAd ? changeAd : changeAd}
               disabled={buttonDisabled || requestProcess.loading}
             >
               <S.Button_text>
@@ -380,4 +383,4 @@ function AdvModal({ modal, handleModal, currentAd }) {
   );
 }
 
-export default AdvModal;
+export default EditAdv;

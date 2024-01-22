@@ -15,7 +15,7 @@ function Seller() {
   const [user, setUser] = useState();
   useEffect(() => {
     if (!params.id) {
-      navigate("/");
+      navigate("/*");
     }
     getUserById(params.id).then((data) => {
       if (data) {
@@ -23,6 +23,8 @@ function Seller() {
         getAds({ user_id: data.id }).then((userAdsData) => {
           if (userAdsData) {
             setUserAds(userAdsData);
+          } else {
+            navigate("/*");
           }
         });
       }
@@ -111,7 +113,9 @@ function Seller() {
             <S.Content__cards>
               {!userAds
                 ? "Загрузка"
-                : userAds?.map((el) => <CardsItem element={el} />)}
+                : userAds?.map((el, i) => (
+                    <CardsItem element={el} key={i + 1} />
+                  ))}
             </S.Content__cards>
           </S.Main__content>
         </S.Sellers__container>

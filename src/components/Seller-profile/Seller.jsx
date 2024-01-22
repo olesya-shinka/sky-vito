@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as S from "./styles";
 import CardsItem from "../CardsItem/CardsItem";
@@ -15,7 +15,7 @@ function Seller() {
   const [user, setUser] = useState();
   useEffect(() => {
     if (!params.id) {
-      navigate(`/*`);
+      return navigate("/*");
     }
     getUserById(params.id).then((data) => {
       if (data) {
@@ -24,7 +24,7 @@ function Seller() {
           if (userAdsData) {
             setUserAds(userAdsData);
           } else {
-            navigate(`/*`);
+            return <Navigate to={`/*`} />;
           }
         });
       }

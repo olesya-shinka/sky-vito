@@ -148,13 +148,13 @@ function NewAdv({ modal, handleModal, currentAd }) {
   };
 
   const handleDelete = (index) => {
-    const deleteImage = Array.isArray(images)
-      ? images.filter((i) => i !== index)
-      : [];
-    console.log(deleteImage);
-    
-    // const deleteImage = images.filter((i) => i !== index);
-    // setImages(deleteImage);
+    // const deleteImage = Array.isArray(images)
+    //   ? images.filter((i) => i !== index)
+    //   : [];
+    // console.log(deleteImage);
+
+    const deleteImage = images.filter((i) => i !== index);
+    setImages(deleteImage);
 
     // const deleteImage = [...images];
     // deleteImage.splice(index, 1);

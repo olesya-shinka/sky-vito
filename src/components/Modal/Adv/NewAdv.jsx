@@ -150,10 +150,13 @@ function NewAdv({ modal, handleModal, currentAd }) {
     //   ? images.filter((i) => i !== index)
     //   : [];
     // console.log(deleteImage);//выходит пустой массив
-
-    const deleteImage = images.filter((i) => i !== index);
+    const deleteImage = images.filter((i) => i !== index) ?? null;
     setImages(deleteImage);
-
+    // setImages((prev) => [
+    //   ...prev.slice(0, index),
+    //   undefined,
+    //   ...prev.slice(index + 1),
+    // ]);
     // const deleteImage = [...images];
     // deleteImage.splice(index, 1);
     // setImages(deleteImage);//не итерируется
